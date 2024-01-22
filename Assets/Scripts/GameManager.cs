@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     private int currentHole;
     public int currentHitNumber;
     private List<int> previousHitNumbers;
+    public TextMeshPro scoreText;
 
     [SerializeField] private List<Transform> startingPositions;
 
@@ -70,6 +72,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < previousHitNumbers.Count; i++)
         {
             Debug.Log("HOLE " + (i+1) + " - HITS: " + previousHitNumbers[i]);
+            scoreText.text += "HOLE " + (i + 1) + " - HITS: " + previousHitNumbers[i] + "<br>";
         }
     }
 }
