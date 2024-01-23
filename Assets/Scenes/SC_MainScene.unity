@@ -1752,7 +1752,6 @@ GameObject:
   - component: {fileID: 1177112636}
   - component: {fileID: 1177112635}
   - component: {fileID: 1177112634}
-  - component: {fileID: 1177112633}
   m_Layer: 0
   m_Name: Right Controller
   m_TagString: Untagged
@@ -1777,43 +1776,6 @@ Transform:
   - {fileID: 1292309952}
   m_Father: {fileID: 1022762666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1177112633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177112631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a20ea24b43a6374982e0a2f00a6b1bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pinchAnimationAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: 
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 4333ea2a-680c-43c9-9771-4e19c14254c0
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  gripAnimationAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: 
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 6f80d7b7-8b07-47a4-a1d0-06cfbbe0fa23
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  handAnimator: {fileID: 0}
 --- !u!210 &1177112634
 SortingGroup:
   m_ObjectHideFlags: 0

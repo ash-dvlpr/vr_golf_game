@@ -30,7 +30,6 @@ public class LaunchBall : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
         {
-            Debug.Log("Plap plap plap");
             GameManager.sharedInstance.currentHitNumber++;
             
             Vector3 collisionPos = clubCollider.ClosestPoint(other.transform.position);

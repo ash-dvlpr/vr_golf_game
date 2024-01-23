@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
             sharedInstance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        previousHitNumbers = new List<int>();
+        currentHitNumber = 0;
     }
 
     private void Start()
