@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         DisplayScore();
     }
 
-    private void ResetBall()
+    public void ResetBall()
     {
         ballRigidBody.transform.position = startingPositions[currentHole].position;
         ballRigidBody.velocity = Vector3.zero;
