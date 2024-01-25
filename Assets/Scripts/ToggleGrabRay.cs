@@ -11,7 +11,8 @@ public class ToggleGrabRay : MonoBehaviour
 
     private void Update()
     {
-        leftGrabRay.SetActive(leftDirectGrab.interactablesSelected.Count == 0);
-        rightGrabRay.SetActive(rightDirectGrab.interactablesSelected.Count == 0);
+        //Si la mano contraria está ocupada no se activa
+        leftGrabRay.SetActive(leftDirectGrab.interactablesSelected.Count == 0 && !GameManager.sharedInstance.rightHandFull);
+        rightGrabRay.SetActive(rightDirectGrab.interactablesSelected.Count == 0 && !GameManager.sharedInstance.leftHandFull);
     }
 }
