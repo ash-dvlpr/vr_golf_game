@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1185460234838425301}
   - component: {fileID: 5940138305222008061}
   - component: {fileID: 8305639573501314052}
+  - component: {fileID: 4278551265781761836}
   m_Layer: 7
   m_Name: PF_Red_Club_Normal
   m_TagString: Club
@@ -29,14 +30,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825885717812968372}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -5, y: 1.56, z: 1.97}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8247198372360363095}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4126627608825367477
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -287,6 +288,19 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &4278551265781761836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825885717812968372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa829606b8ea294f9f9dd49c0e87756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetArea: {fileID: 0}
 --- !u!1 &8420198683246993733
 GameObject:
   m_ObjectHideFlags: 0

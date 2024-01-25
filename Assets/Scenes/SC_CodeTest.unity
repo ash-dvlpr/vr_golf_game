@@ -134,10 +134,9 @@ GameObject:
   - component: {fileID: 27760331}
   - component: {fileID: 27760330}
   - component: {fileID: 27760328}
-  - component: {fileID: 27760332}
   m_Layer: 0
-  m_Name: Plane
-  m_TagString: Untagged
+  m_Name: Reset Plane
+  m_TagString: ResetPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,18 +186,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &27760332
-MonoBehaviour:
+--- !u!1 &56537964
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27760327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa829606b8ea294f9f9dd49c0e87756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56537965}
+  m_Layer: 0
+  m_Name: Green club reset point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &56537965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56537964}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071059, w: 0.7071078}
+  m_LocalPosition: {x: -5, y: 1.56, z: 2.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1248561803}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &128556790
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +879,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2295231090447771234, guid: 933cd5d698dbd4f45bcf8970dbc56ee4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 494644541}
   m_SourcePrefab: {fileID: 100100000, guid: 933cd5d698dbd4f45bcf8970dbc56ee4, type: 3}
 --- !u!4 &423948998 stripped
 Transform:
@@ -980,6 +1002,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462722501}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &494644537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2295231090447771234, guid: 933cd5d698dbd4f45bcf8970dbc56ee4,
+    type: 3}
+  m_PrefabInstance: {fileID: 423948997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &494644541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494644537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa829606b8ea294f9f9dd49c0e87756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetArea: {fileID: 0}
 --- !u!1 &525822983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +1050,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 667109416}
+  m_Father: {fileID: 1248561803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667109415
 GameObject:
@@ -1046,8 +1087,38 @@ Transform:
   - {fileID: 1529948179}
   - {fileID: 2139881914}
   - {fileID: 1367983725}
-  - {fileID: 525822984}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &675307560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675307561}
+  m_Layer: 0
+  m_Name: Red club reset point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &675307561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675307560}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071059, w: 0.7071078}
+  m_LocalPosition: {x: -5, y: 1.56, z: 1.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1248561803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &691380523
 GameObject:
@@ -1549,6 +1620,41 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1248561802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248561803}
+  m_Layer: 0
+  m_Name: Reset Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1248561803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248561802}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 525822984}
+  - {fileID: 1927123406}
+  - {fileID: 675307561}
+  - {fileID: 56537965}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1327434576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2285,6 +2391,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846299861}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1927123405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1927123406}
+  m_Layer: 0
+  m_Name: Blue club reset point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1927123406
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927123405}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071059, w: 0.7071078}
+  m_LocalPosition: {x: -5, y: 1.56, z: 0.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1248561803}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2073464582
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,6 +2692,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3069313842253220328, guid: 3875b495653a52043b38400bdc83addb,
+        type: 3}
+      propertyPath: resetArea
+      value: 
+      objectReference: {fileID: 56537965}
     - target: {fileID: 9056729456703064808, guid: 3875b495653a52043b38400bdc83addb,
         type: 3}
       propertyPath: m_Name
@@ -2628,6 +2770,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4278551265781761836, guid: 8065b76fac03ec24b853b8a0e819fef5,
+        type: 3}
+      propertyPath: resetArea
+      value: 
+      objectReference: {fileID: 675307561}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2646,6 +2793,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue club (Easy)
       objectReference: {fileID: 0}
+    - target: {fileID: 2722270896500581822, guid: a6cabe61d98c86545b39672bdec282f4,
+        type: 3}
+      propertyPath: resetArea
+      value: 
+      objectReference: {fileID: 1927123406}
     - target: {fileID: 5073563576836571365, guid: a6cabe61d98c86545b39672bdec282f4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2716,3 +2868,4 @@ SceneRoots:
   - {fileID: 5915237023365125917}
   - {fileID: 667109416}
   - {fileID: 27760331}
+  - {fileID: 1248561803}
