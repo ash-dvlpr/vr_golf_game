@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
         ballRigidBody.transform.position = startingPositions[currentHole].position;
         ballRigidBody.velocity = Vector3.zero;
         ballRigidBody.angularVelocity = Vector3.zero;
+        BallIndicator.sharedInstance.TurnOn();
     }
 
     public void DisplayScore()

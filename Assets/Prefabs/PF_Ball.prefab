@@ -152,7 +152,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0b2c79948ac04ff4487816dc8661c519,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0b2c79948ac04ff4487816dc8661c519,
         type: 3}
@@ -220,6 +220,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3282713992434265525}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b2c79948ac04ff4487816dc8661c519,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4903454486990349301}
   m_SourcePrefab: {fileID: 100100000, guid: 0b2c79948ac04ff4487816dc8661c519, type: 3}
 --- !u!4 &1482137450227842264 stripped
 Transform:
@@ -281,3 +285,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.034971617
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4903454486990349301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2295231090447771234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa829606b8ea294f9f9dd49c0e87756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetArea: {fileID: 0}
