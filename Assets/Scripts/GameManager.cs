@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -79,5 +80,15 @@ public class GameManager : MonoBehaviour
             Debug.Log("HOLE " + (i+1) + " - HITS: " + previousHitNumbers[i]);
             scoreText.text += "HOLE " + (i + 1) + " - HITS: " + previousHitNumbers[i] + "<br>";
         }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
