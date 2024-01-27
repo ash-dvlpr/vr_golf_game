@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,14 @@ public class GameManager : MonoBehaviour
 
     public bool leftHandFull;
     public bool rightHandFull;
+
+    [SerializeField] private TMP_Dropdown movementDropdown;
+    public bool continuousMovement;
+    public bool teleportation;
+
+    [SerializeField] private TMP_Dropdown turnDropdown;
+    public bool continuousTurn;
+    public bool snapTurn;
 
     private void Awake()
     {
@@ -90,5 +99,44 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void ChangeMovement()
+    {
+        switch (movementDropdown.value)
+        {
+            case 0:
+            {
+                continuousMovement = true;
+                teleportation = true;
+            } break;
+            case 1:
+            {
+                continuousMovement = true;
+                teleportation = false;
+            } break;
+            case 2:
+            {
+                continuousMovement = false;
+                teleportation = true;
+            } break;
+        }
+    }
+
+    public void ChangeTrun()
+    {
+        switch (turnDropdown.value)
+        {
+            case 0:
+            {
+                snapTurn = true;
+                continuousTurn = false;
+            } break;
+            case 1:
+            {
+                snapTurn = false;
+                continuousTurn = true;
+            } break;
+        }
     }
 }
