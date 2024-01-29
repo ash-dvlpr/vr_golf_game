@@ -38,6 +38,8 @@ public class LaunchBall : MonoBehaviour
             
             Rigidbody rBall = other.attachedRigidbody;
             rBall.velocity = /*velocity*/projectedVelocity;
+            
+            BallIndicator.sharedInstance.TurnOff();
         }
     }
 }
