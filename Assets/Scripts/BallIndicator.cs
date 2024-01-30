@@ -9,7 +9,8 @@ public class BallIndicator : MonoBehaviour
     
     [SerializeField] private Transform ballPosition;
 
-    private MeshRenderer indicatorRender;
+    [SerializeField] private GameObject cylinder;
+    [SerializeField] private GameObject particleSystem;
     private AudioSource indicatorAudioSource;
 
     private void Awake()
@@ -24,25 +25,26 @@ public class BallIndicator : MonoBehaviour
             //DontDestroyOnLoad(gameObject);
         }
 
-        indicatorRender = GetComponent<MeshRenderer>();
         indicatorAudioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        transform.position = new Vector3(ballPosition.position.x, ballPosition.position.y + 1f, ballPosition.position.z);
+        TurnOn();
     }
 
     public void TurnOn()
     {
-        transform.position = new Vector3(ballPosition.position.x, ballPosition.position.y + 1f, ballPosition.position.z);
-        indicatorRender.enabled = true;
+        transform.position = ballPosition.position;
+        cylinder.SetActive(true);
+        particleSystem.SetActive(true);
         indicatorAudioSource.Play();
     }
 
     public void TurnOff()
     {
-        indicatorRender.enabled = false;
+        cylinder.SetActive(false);
+        particleSystem.SetActive(false);
         indicatorAudioSource.Stop();
     }
 }
