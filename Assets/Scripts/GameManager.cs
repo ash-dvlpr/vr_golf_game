@@ -12,12 +12,25 @@ public class GameManager : MonoBehaviour
     private int currentHole;
     public int currentHitNumber;
     private List<int> previousHitNumbers;
-    public TextMeshPro scoreText;
+    private int totalHits;
+    
+    public List<TextMeshProUGUI> scoreText;
+    public TextMeshProUGUI totalHitsText;
+    public TextMeshProUGUI recordHitsText;
+    [SerializeField] private Color completedHoleColor;
+    [SerializeField] private Color currentHoleColor;
+    [SerializeField] private Color incompletedHoleColor;
+    public GameObject restartButton;
+    public GameObject exitButton;
 
-    [SerializeField] private List<Transform> startingPositions;
+    public List<Transform> startingPositions;
 
-    [SerializeField] private Rigidbody ballRigidBody;
+    public Rigidbody ballRigidBody;
 
+    public bool handsFull
+    {
+        get => leftHandFull || rightHandFull;
+    }
     public bool leftHandFull;
     public bool rightHandFull;
 
@@ -33,11 +46,8 @@ public class GameManager : MonoBehaviour
     {
 
         if(sharedInstance != null && sharedInstance != this) {
-            Destroy(sharedInstance);
-
-            // Preservar el GameManager mas nuevo
-            sharedInstance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(this);
+            
         }
         else {
             sharedInstance = this;
@@ -46,11 +56,12 @@ public class GameManager : MonoBehaviour
 
         previousHitNumbers = new List<int>();
         currentHitNumber = 0;
+        totalHits = 0;
     }
 
     private void Start()
     {
-        ResetBall();
+        //ResetBall();
     }
 
     private void Update()
@@ -66,15 +77,41 @@ public class GameManager : MonoBehaviour
         currentHole++;
         if (currentHole >= startingPositions.Count)
         {
-            Debug.Log("Has completado todos los hoyos VAMOOO");
+            FinishGame();
         }
         else
         {
             ResetBall();
+            UpdateCurrentHits();
+            currentHitNumber = 0;
+            DisplayScore();
         }
-        previousHitNumbers.Add(currentHitNumber);
-        currentHitNumber = 0;
-        DisplayScore();
+    }
+
+    public void FinishGame()
+    {
+        int record = PlayerPrefs.GetInt("record");
+        if (totalHits < record || record == 0)
+        {
+            Debug.Log("NUEVO RECORD");
+            PlayerPrefs.SetInt("record", totalHits);
+            recordHitsText.text = "RECORD HITS: " + totalHits;
+        }
+        restartButton.SetActive(true);
+        exitButton.SetActive(true);
+        Debug.Log("Has completado todos los hoyos VAMOOO");
+    }
+
+    public void UpdateCurrentHits()
+    {
+        if (currentHole >= previousHitNumbers.Count)
+        {
+            previousHitNumbers.Add(currentHitNumber);
+        }
+        else
+        {
+            previousHitNumbers[currentHole] += currentHitNumber;
+        }
     }
 
     public void ResetBall()
@@ -87,10 +124,35 @@ public class GameManager : MonoBehaviour
 
     public void DisplayScore()
     {
+        totalHits = 0;
         for (int i = 0; i < previousHitNumbers.Count; i++)
         {
             Debug.Log("HOLE " + (i+1) + " - HITS: " + previousHitNumbers[i]);
-            scoreText.text += "HOLE " + (i + 1) + " - HITS: " + previousHitNumbers[i] + "<br>";
+            totalHits += previousHitNumbers[i];
+            scoreText[i].text = (i+1) + "\t\t\t -\t\t" + previousHitNumbers[i];
+        }
+        totalHitsText.text = "TOTAL HITS: " + totalHits;
+        ChangeScoreColor();
+    }
+
+    private void ChangeScoreColor()
+    {
+        for (int i = 0; i < scoreText.Count; i++)
+        {
+            if (i < currentHole)
+            {
+                scoreText[i].color = completedHoleColor;
+            }
+
+            if (i == currentHole)
+            {
+                scoreText[i].color = currentHoleColor;
+            }
+
+            if (i > currentHole)
+            {
+                scoreText[i].color = incompletedHoleColor;
+            }
         }
     }
 

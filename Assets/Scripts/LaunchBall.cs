@@ -40,6 +40,9 @@ public class LaunchBall : MonoBehaviour
             rBall.velocity = /*velocity*/projectedVelocity;
             
             BallIndicator.sharedInstance.TurnOff();
+            
+            GameManager.sharedInstance.UpdateCurrentHits();
+            GameManager.sharedInstance.DisplayScore();
         }
     }
 }
