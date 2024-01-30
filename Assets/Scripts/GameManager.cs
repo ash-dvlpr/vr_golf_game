@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,14 +21,25 @@ public class GameManager : MonoBehaviour
     public bool leftHandFull;
     public bool rightHandFull;
 
+    [SerializeField] private TMP_Dropdown movementDropdown;
+    public bool continuousMovement;
+    public bool teleportation;
+
+    [SerializeField] private TMP_Dropdown turnDropdown;
+    public bool continuousTurn;
+    public bool snapTurn;
+
     private void Awake()
     {
-        if (sharedInstance != null && sharedInstance != this)
-        {
-            Destroy(this);
+
+        if(sharedInstance != null && sharedInstance != this) {
+            Destroy(sharedInstance);
+
+            // Preservar el GameManager mas nuevo
+            sharedInstance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
+        else {
             sharedInstance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -69,6 +82,7 @@ public class GameManager : MonoBehaviour
         ballRigidBody.transform.position = startingPositions[currentHole].position;
         ballRigidBody.velocity = Vector3.zero;
         ballRigidBody.angularVelocity = Vector3.zero;
+        BallIndicator.sharedInstance.TurnOn();
     }
 
     public void DisplayScore()
@@ -77,6 +91,55 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("HOLE " + (i+1) + " - HITS: " + previousHitNumbers[i]);
             scoreText.text += "HOLE " + (i + 1) + " - HITS: " + previousHitNumbers[i] + "<br>";
+        }
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ChangeMovement()
+    {
+        switch (movementDropdown.value)
+        {
+            case 0:
+            {
+                continuousMovement = true;
+                teleportation = true;
+            } break;
+            case 1:
+            {
+                continuousMovement = true;
+                teleportation = false;
+            } break;
+            case 2:
+            {
+                continuousMovement = false;
+                teleportation = true;
+            } break;
+        }
+    }
+
+    public void ChangeTrun()
+    {
+        switch (turnDropdown.value)
+        {
+            case 0:
+            {
+                snapTurn = true;
+                continuousTurn = false;
+            } break;
+            case 1:
+            {
+                snapTurn = false;
+                continuousTurn = true;
+            } break;
         }
     }
 }
