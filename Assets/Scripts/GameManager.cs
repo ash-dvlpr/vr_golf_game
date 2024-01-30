@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            SoundManager.sharedInstance.clappingSound.Play();
             ResetBall();
             UpdateCurrentHits();
             currentHitNumber = 0;
@@ -93,6 +94,9 @@ public class GameManager : MonoBehaviour
 
     public void FinishGame()
     {
+        BallIndicator.sharedInstance.TurnOff();
+        SoundManager.sharedInstance.gameMusic.Stop();
+        SoundManager.sharedInstance.endGameMusic.Play();
         scoreText[scoreText.Count - 1].color = completedHoleColor;
         int record = PlayerPrefs.GetInt("record");
         if (totalHits < record || record == 0)
@@ -123,6 +127,8 @@ public class GameManager : MonoBehaviour
         restartButton.SetActive(false);
         exitButton.SetActive(false);
         ResetBall();
+        SoundManager.sharedInstance.endGameMusic.Stop();
+        SoundManager.sharedInstance.gameMusic.Play();
     }
 
     private IEnumerator NewRecord()

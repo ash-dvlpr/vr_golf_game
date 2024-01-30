@@ -9,6 +9,9 @@ public class LaunchBall : MonoBehaviour
     private Vector3 previousPosition;
     private Vector3 velocity;
     private Collider clubCollider;
+    
+    [SerializeField] private AudioSource slowHitSound;
+    [SerializeField] private AudioSource hardHitSound;
 
     private void Awake()
     {
@@ -37,7 +40,17 @@ public class LaunchBall : MonoBehaviour
             Vector3 projectedVelocity = Vector3.Project(velocity, collisionNormal);
             
             Rigidbody rBall = other.attachedRigidbody;
-            rBall.velocity = /*velocity*/projectedVelocity;
+            rBall.velocity = projectedVelocity;
+
+            //Debug.Log("Golpe X: " + projectedVelocity.x + " Golpe Y: " + projectedVelocity.y + " Golpe Z: " + projectedVelocity.z);
+            if ((projectedVelocity.x < -1.1f || projectedVelocity.x > 1.1f) || (projectedVelocity.z < -1.1f || projectedVelocity.z > 1.1f))
+            {
+                slowHitSound.Play();
+            }
+            else
+            {
+                hardHitSound.Play();
+            }
             
             BallIndicator.sharedInstance.TurnOff();
             
