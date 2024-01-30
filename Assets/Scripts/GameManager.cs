@@ -31,12 +31,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (sharedInstance != null && sharedInstance != this)
-        {
-            Destroy(this);
+
+        if(sharedInstance != null && sharedInstance != this) {
+            Destroy(sharedInstance);
+
+            // Preservar el GameManager mas nuevo
+            sharedInstance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
+        else {
             sharedInstance = this;
             DontDestroyOnLoad(gameObject);
         }
