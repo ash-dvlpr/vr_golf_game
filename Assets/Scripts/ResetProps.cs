@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResetProps : MonoBehaviour
@@ -9,14 +10,19 @@ public class ResetProps : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ResetPlane"))
+        
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.CompareTag("ResetPlane"))
         {
             if (CompareTag("Ball"))
             {
                 GameManager.sharedInstance.ResetBall();
             }
 
-            if (CompareTag("Club"))
+            if (CompareTag("Club") && !GameManager.sharedInstance.handsFull)
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
