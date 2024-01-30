@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public List<TextMeshProUGUI> scoreText;
     public TextMeshProUGUI totalHitsText;
     public TextMeshProUGUI recordHitsText;
+    public TextMeshProUGUI gameCompletedText;
+    public TextMeshProUGUI newRecordText;
     [SerializeField] private Color completedHoleColor;
     [SerializeField] private Color currentHoleColor;
     [SerializeField] private Color incompletedHoleColor;
@@ -44,12 +47,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
-        if(sharedInstance != null && sharedInstance != this) {
+        if(sharedInstance != null && sharedInstance != this)
+        {
             Destroy(this);
-            
         }
-        else {
+        else
+        {
             sharedInstance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -57,16 +60,16 @@ public class GameManager : MonoBehaviour
         previousHitNumbers = new List<int>();
         currentHitNumber = 0;
         totalHits = 0;
-    }
-
-    private void Start()
-    {
-        //ResetBall();
+        currentHole = 0;
     }
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        /*if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            GoToNextHole();
+        }*/
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GoToNextHole();
         }
@@ -90,16 +93,43 @@ public class GameManager : MonoBehaviour
 
     public void FinishGame()
     {
+        scoreText[scoreText.Count - 1].color = completedHoleColor;
         int record = PlayerPrefs.GetInt("record");
         if (totalHits < record || record == 0)
         {
-            Debug.Log("NUEVO RECORD");
             PlayerPrefs.SetInt("record", totalHits);
             recordHitsText.text = "RECORD HITS: " + totalHits;
         }
+        gameCompletedText.gameObject.SetActive(true);
         restartButton.SetActive(true);
         exitButton.SetActive(true);
-        Debug.Log("Has completado todos los hoyos VAMOOO");
+        GameMenuManager.sharedInstance.ActivateCanvas();
+        StartCoroutine(NewRecord());
+    }
+
+    public void ResetGame()
+    {
+        currentHole = 0;
+        previousHitNumbers = new List<int>();
+        currentHitNumber = 0;
+        totalHits = 0;
+        for (int i = 0; i < scoreText.Count; i++)
+        {
+            scoreText[i].text = (i+1) + "\t\t\t -\t\t00";
+        }
+        totalHitsText.text = "TOTAL HITS: 000";
+        ChangeScoreColor();
+        gameCompletedText.gameObject.SetActive(false);
+        restartButton.SetActive(false);
+        exitButton.SetActive(false);
+        ResetBall();
+    }
+
+    private IEnumerator NewRecord()
+    {
+        newRecordText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        newRecordText.gameObject.SetActive(false);
     }
 
     public void UpdateCurrentHits()

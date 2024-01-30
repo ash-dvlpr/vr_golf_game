@@ -20,6 +20,8 @@ public class LevelConfigurationManager : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> scoreText;
     [SerializeField] private TextMeshProUGUI totalHitsText;
     [SerializeField] private TextMeshProUGUI recordHitsText;
+    [SerializeField] private TextMeshProUGUI gameCompletedText;
+    [SerializeField] private TextMeshProUGUI newRecordText;
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject exitButton;
 
@@ -37,6 +39,8 @@ public class LevelConfigurationManager : MonoBehaviour
         GameManager.sharedInstance.scoreText = scoreText;
         GameManager.sharedInstance.totalHitsText = totalHitsText;
         GameManager.sharedInstance.recordHitsText = recordHitsText;
+        GameManager.sharedInstance.gameCompletedText = gameCompletedText;
+        GameManager.sharedInstance.newRecordText = newRecordText;
         GameManager.sharedInstance.restartButton = restartButton;
         GameManager.sharedInstance.exitButton = exitButton;
     }
@@ -44,5 +48,15 @@ public class LevelConfigurationManager : MonoBehaviour
     private void Start()
     {
         recordHitsText.text = "RECORD HITS: " + PlayerPrefs.GetInt("record");
+    }
+
+    public void ResetGame()
+    {
+        GameManager.sharedInstance.ResetGame();
+    }
+
+    public void ExitGame()
+    {
+        GameManager.sharedInstance.ExitGame();
     }
 }
