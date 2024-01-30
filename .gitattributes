@@ -152,5 +152,5 @@ Assets/TextMeshPro/Resources/**/*.asset lfs-file
 Assets/Prefabs/*.prefab lfs-file
 
 # Big Scene Files
-**/Assets/Scenes/*.unity unity-yaml-file lfs-file
-Assets/Scenes/*.unity unity-yaml-file lfs-file
+**/Assets/Scenes/**/*.unity unity-yaml-file lfs-file
+Assets/Scenes/**/*.unity unity-yaml-file lfs-file
