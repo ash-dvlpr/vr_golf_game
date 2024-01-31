@@ -148,6 +148,7 @@ public class GameManager : MonoBehaviour
         {
             previousHitNumbers[currentHole] += currentHitNumber;
         }
+        currentHitNumber = 0;
     }
 
     public void ResetBall()

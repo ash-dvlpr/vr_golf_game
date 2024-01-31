@@ -13,6 +13,8 @@ public class LaunchBall : MonoBehaviour
     [SerializeField] private AudioSource slowHitSound;
     [SerializeField] private AudioSource hardHitSound;
 
+    [SerializeField] private Rigidbody ballRB;
+
     private void Awake()
     {
         clubCollider = GetComponent<Collider>();
@@ -31,7 +33,7 @@ public class LaunchBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(targetTag))
+        if (other.CompareTag(targetTag) && ballRB.velocity == Vector3.zero)
         {
             GameManager.sharedInstance.currentHitNumber++;
             
