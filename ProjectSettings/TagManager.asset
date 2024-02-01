@@ -5,16 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
+  - Club
+  - ResetPlane
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Interactable
+  - Ball
   - 
   - 
   - 
