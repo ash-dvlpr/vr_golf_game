@@ -1,22 +1,23 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
+//Clase que asigna numerosas variables de la MainScene al GameManager
 public class LevelConfigurationManager : MonoBehaviour
 {
+    //Movimiento y cámara del jugador
     [SerializeField] private SnapTurnProviderBase playerSnapTurn;
     [SerializeField] private ContinuousTurnProviderBase playerContinuousTurn;
     [SerializeField] private TeleportationProvider playerTeleportation;
     [SerializeField] private ActivateTeleportationRay playerTpRayActivator;
     [SerializeField] private ContinuousMoveProviderBase playerContinuousMove;
     
+    //Variables del campo de golf
     [SerializeField] private List<Transform> startingPositions;
     [SerializeField] private Rigidbody ballRigidBody;
     
+    //Variables de la UI
     [SerializeField] private List<TextMeshProUGUI> scoreText;
     [SerializeField] private TextMeshProUGUI totalHitsText;
     [SerializeField] private TextMeshProUGUI recordHitsText;

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Clase que activa el paso al siguiente hoyo al detectar la bola
 public class HoleTrigger : MonoBehaviour
 {
     private string targetTag = "Ball";

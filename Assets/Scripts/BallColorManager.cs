@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//Clase que cambia el color de la bola según se esté o no moviendo
 public class BallColorManager : MonoBehaviour
 {
     [SerializeField] private Material stillMaterial;
