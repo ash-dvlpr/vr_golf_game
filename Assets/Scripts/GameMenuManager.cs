@@ -10,7 +10,9 @@ public class GameMenuManager : MonoBehaviour
     
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private InputActionProperty menuButton;
-
+#if UNITY_EDITOR || PLATFORM_ANDROID
+    [SerializeField] private InputActionProperty cheatRecordButton;
+#endif
     [SerializeField] private Transform head;
     [SerializeField] private float menuHeadDistance;
 
@@ -34,6 +36,13 @@ public class GameMenuManager : MonoBehaviour
             menuCanvas.SetActive(!menuCanvas.activeSelf);
             menuCanvas.transform.position = head.position + new Vector3(head.forward.x, 0, head.forward.z).normalized * menuHeadDistance;
         }
+
+#if UNITY_EDITOR || PLATFORM_ANDROID
+        if(cheatRecordButton.action.WasPressedThisFrame() && GameManager.sharedInstance.CheatsEnabled) {
+            PlayerPrefs.SetInt("record", int.MaxValue);
+            GameManager.sharedInstance.GoToNextHole();
+        }
+#endif
         menuCanvas.transform.LookAt(new Vector3(head.position.x, menuCanvas.transform.position.y, head.position.z));
         //Para que no aparezca el menú en modo espejo
         menuCanvas.transform.forward *= -1;

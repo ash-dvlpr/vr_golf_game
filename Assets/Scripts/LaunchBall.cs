@@ -62,7 +62,9 @@ public class LaunchBall : MonoBehaviour
             rBall.velocity = projectedVelocity;
 
             //Debug.Log("Golpe X: " + projectedVelocity.x + " Golpe Y: " + projectedVelocity.y + " Golpe Z: " + projectedVelocity.z);
-            if ((projectedVelocity.x < -1.1f || projectedVelocity.x > 1.1f) || (projectedVelocity.z < -1.1f || projectedVelocity.z > 1.1f))
+            
+            //if ((projectedVelocity.x < -1.1f || projectedVelocity.x > 1.1f) || (projectedVelocity.z < -1.1f || projectedVelocity.z > 1.1f))
+            if (projectedVelocity.sqrMagnitude < 2f)
             {
                 slowHitSound.Play();
             }

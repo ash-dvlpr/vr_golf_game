@@ -20,10 +20,8 @@ public class LevelConfigurationManager : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> scoreText;
     [SerializeField] private TextMeshProUGUI totalHitsText;
     [SerializeField] private TextMeshProUGUI recordHitsText;
-    [SerializeField] private TextMeshProUGUI gameCompletedText;
-    [SerializeField] private TextMeshProUGUI newRecordText;
-    [SerializeField] private GameObject restartButton;
-    [SerializeField] private GameObject exitButton;
+    [SerializeField] private GameObject extraInfoStuff;
+    [SerializeField] private Canvas newRecordText;
 
     private void Awake()
     {
@@ -39,10 +37,8 @@ public class LevelConfigurationManager : MonoBehaviour
         GameManager.sharedInstance.scoreText = scoreText;
         GameManager.sharedInstance.totalHitsText = totalHitsText;
         GameManager.sharedInstance.recordHitsText = recordHitsText;
-        GameManager.sharedInstance.gameCompletedText = gameCompletedText;
+        GameManager.sharedInstance.extraInfoStuff = extraInfoStuff;
         GameManager.sharedInstance.newRecordText = newRecordText;
-        GameManager.sharedInstance.restartButton = restartButton;
-        GameManager.sharedInstance.exitButton = exitButton;
     }
 
     private void Start()

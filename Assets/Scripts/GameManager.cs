@@ -9,7 +9,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager sharedInstance;
-    
+
+    [field: SerializeField] public bool CheatsEnabled { get; private set; } = false;
+
     private int currentHole;
     public int currentHitNumber;
     private List<int> previousHitNumbers;
@@ -18,13 +20,11 @@ public class GameManager : MonoBehaviour
     public List<TextMeshProUGUI> scoreText;
     public TextMeshProUGUI totalHitsText;
     public TextMeshProUGUI recordHitsText;
-    public TextMeshProUGUI gameCompletedText;
-    public TextMeshProUGUI newRecordText;
+    public GameObject extraInfoStuff;
+    public Canvas newRecordText;
     [SerializeField] private Color completedHoleColor;
     [SerializeField] private Color currentHoleColor;
     [SerializeField] private Color incompletedHoleColor;
-    public GameObject restartButton;
-    public GameObject exitButton;
 
     public List<Transform> startingPositions;
 
@@ -104,9 +104,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("record", totalHits);
             recordHitsText.text = "RECORD HITS: " + totalHits;
         }
-        gameCompletedText.gameObject.SetActive(true);
-        restartButton.SetActive(true);
-        exitButton.SetActive(true);
+        extraInfoStuff.gameObject.SetActive(true);
         GameMenuManager.sharedInstance.ActivateCanvas();
         StartCoroutine(NewRecord());
     }
@@ -123,9 +121,7 @@ public class GameManager : MonoBehaviour
         }
         totalHitsText.text = "TOTAL HITS: 000";
         ChangeScoreColor();
-        gameCompletedText.gameObject.SetActive(false);
-        restartButton.SetActive(false);
-        exitButton.SetActive(false);
+        extraInfoStuff.gameObject.SetActive(false);
         ResetBall();
         SoundManager.sharedInstance.endGameMusic.Stop();
         SoundManager.sharedInstance.gameMusic.Play();
