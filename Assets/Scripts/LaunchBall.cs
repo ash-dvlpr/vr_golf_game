@@ -13,6 +13,11 @@ public class LaunchBall : MonoBehaviour
 
     private Vector3 previousPosition;
     private Collider clubCollider;
+    
+    [SerializeField] private AudioSource slowHitSound;
+    [SerializeField] private AudioSource hardHitSound;
+
+    [SerializeField] private Rigidbody ballRB;
 
     private void Awake()
     {
@@ -40,7 +45,7 @@ public class LaunchBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(targetTag))
+        if (other.CompareTag(targetTag) && ballRB.velocity == Vector3.zero)
         {
             // Calculate average compound velocity
             var _compoundVelocity = velocityBuffer.ToList().Aggregate((a, b) => a + b);
@@ -54,7 +59,17 @@ public class LaunchBall : MonoBehaviour
             Vector3 projectedVelocity = Vector3.Project(_compoundVelocity, collisionNormal);
             
             Rigidbody rBall = other.attachedRigidbody;
-            rBall.velocity = /*velocity*/projectedVelocity;
+            rBall.velocity = projectedVelocity;
+
+            //Debug.Log("Golpe X: " + projectedVelocity.x + " Golpe Y: " + projectedVelocity.y + " Golpe Z: " + projectedVelocity.z);
+            if ((projectedVelocity.x < -1.1f || projectedVelocity.x > 1.1f) || (projectedVelocity.z < -1.1f || projectedVelocity.z > 1.1f))
+            {
+                slowHitSound.Play();
+            }
+            else
+            {
+                hardHitSound.Play();
+            }
             
             BallIndicator.sharedInstance.TurnOff();
             
