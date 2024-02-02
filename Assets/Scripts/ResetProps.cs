@@ -1,17 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+//Clase que resetea la bola y los palos al tocar un plano de reset (como el suelo de césped)
 public class ResetProps : MonoBehaviour
 {
     [SerializeField] private Transform resetArea;
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
 
     private void OnCollisionEnter(Collision other)
     {

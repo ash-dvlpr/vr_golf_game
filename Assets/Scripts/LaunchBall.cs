@@ -1,19 +1,21 @@
-using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase que propulsa la bola al ser golpeada por la cabeza del palo
 public class LaunchBall : MonoBehaviour
 {
     [SerializeField] private string targetTag;
 
+    //Variables de velocidad
     private static int BUFFER_LENGTH = 3;
     private readonly Queue<Vector3> velocityBuffer = new();
 
+    //Variables del palo
     private Vector3 previousPosition;
     private Collider clubCollider;
     
+    //Sonidos
     [SerializeField] private AudioSource slowHitSound;
     [SerializeField] private AudioSource hardHitSound;
 
@@ -34,36 +36,35 @@ public class LaunchBall : MonoBehaviour
 
     private void Update()
     {
-        // Calculate this frame's velocity
+        //Calcula la velocidad en este frame
         var velocity = (transform.position - previousPosition) / Time.deltaTime;
         previousPosition = transform.position;
 
-        // Store the velocity
+        //Almacena la velocidad
         velocityBuffer.Enqueue(velocity);
-        velocityBuffer.Dequeue(); // Pop oldest velocity
+        velocityBuffer.Dequeue(); //Elimina la velocidad más antigua
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag) && ballRB.velocity == Vector3.zero)
         {
-            // Calculate average compound velocity
+            //Calcula la velocidad compuesta media
             var _compoundVelocity = velocityBuffer.ToList().Aggregate((a, b) => a + b);
             _compoundVelocity /= velocityBuffer.Count;
 
-            // Apply velocity
+            //Se incrementa el número de golpes
             GameManager.sharedInstance.currentHitNumber++;
             
             Vector3 collisionPos = clubCollider.ClosestPoint(other.transform.position);
             Vector3 collisionNormal = other.transform.position - collisionPos;
             Vector3 projectedVelocity = Vector3.Project(_compoundVelocity, collisionNormal);
             
+            //Aplica la velocidad
             Rigidbody rBall = other.attachedRigidbody;
             rBall.velocity = projectedVelocity;
 
-            //Debug.Log("Golpe X: " + projectedVelocity.x + " Golpe Y: " + projectedVelocity.y + " Golpe Z: " + projectedVelocity.z);
-            
-            //if ((projectedVelocity.x < -1.1f || projectedVelocity.x > 1.1f) || (projectedVelocity.z < -1.1f || projectedVelocity.z > 1.1f))
+            //Reproduce un audio dependiendo de la fuerza del golpe
             if (projectedVelocity.sqrMagnitude < 2f)
             {
                 slowHitSound.Play();
@@ -73,8 +74,10 @@ public class LaunchBall : MonoBehaviour
                 hardHitSound.Play();
             }
             
+            //Se oculta el indicador de bola
             BallIndicator.sharedInstance.TurnOff();
             
+            //Se actualiza la puntuación
             GameManager.sharedInstance.UpdateCurrentHits();
             GameManager.sharedInstance.DisplayScore();
         }

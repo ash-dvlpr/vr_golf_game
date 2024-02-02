@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//Clase que contiene los métodos para encender y apagar el indicador de la bola, así como ajustar su posición
 public class BallIndicator : MonoBehaviour
 {
     public static BallIndicator sharedInstance;
@@ -22,7 +20,6 @@ public class BallIndicator : MonoBehaviour
         else
         {
             sharedInstance = this;
-            //DontDestroyOnLoad(gameObject);
         }
 
         indicatorAudioSource = GetComponent<AudioSource>();
