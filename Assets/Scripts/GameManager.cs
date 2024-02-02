@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
+//Clase que controla numerosos aspectos y variables del juego
 public class GameManager : MonoBehaviour
 {
     public static GameManager sharedInstance;
-
+    
+    //Esta propiedad mantiene su valor entre las diferentes estancias de GameManager
     [field: SerializeField] public bool CheatsEnabled { get; private set; } = false;
-
+    
+    //Variables de los hoyos
     private int currentHole;
-    public int currentHitNumber;
+    [field: Header("Holes variables")] public int currentHitNumber;
     private List<int> previousHitNumbers;
     private int totalHits;
+    public List<Transform> startingPositions;
     
-    public List<TextMeshProUGUI> scoreText;
+    //Variables de la UI
+    [field: Header("UI variables")] public List<TextMeshProUGUI> scoreText;
     public TextMeshProUGUI totalHitsText;
     public TextMeshProUGUI recordHitsText;
     public GameObject extraInfoStuff;
@@ -25,23 +28,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color completedHoleColor;
     [SerializeField] private Color currentHoleColor;
     [SerializeField] private Color incompletedHoleColor;
-
-    public List<Transform> startingPositions;
-
+    [field: Space(20)]
+    
+    
     public Rigidbody ballRigidBody;
 
+    //Variables de las manos
     public bool handsFull
     {
         get => leftHandFull || rightHandFull;
     }
-    public bool leftHandFull;
+    [field: Header("Hands variables")] public bool leftHandFull;
     public bool rightHandFull;
 
-    [SerializeField] private TMP_Dropdown movementDropdown;
+    //Variables de movimiento de jugador y cámara
+    [field: Header("Movement variables")] [SerializeField] private TMP_Dropdown movementDropdown;
     public bool continuousMovement;
     public bool teleportation;
 
-    [SerializeField] private TMP_Dropdown turnDropdown;
+    [field: Header("Turn variables")] [SerializeField] private TMP_Dropdown turnDropdown;
     public bool continuousTurn;
     public bool snapTurn;
 
@@ -65,10 +70,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        /*if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            GoToNextHole();
-        }*/
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GoToNextHole();
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextHole()
     {
+        //Si es el último hoyo se para a finalizar la partida
         currentHole++;
         if (currentHole >= startingPositions.Count)
         {
@@ -94,39 +96,55 @@ public class GameManager : MonoBehaviour
 
     public void FinishGame()
     {
+        //Primero se apaga el indicador de la bola (para los tramposos), se anuncia el final con unas trompetas y se cambia la música
         BallIndicator.sharedInstance.TurnOff();
+        SoundManager.sharedInstance.trumpetsSound.Play();
         SoundManager.sharedInstance.gameMusic.Stop();
         SoundManager.sharedInstance.endGameMusic.Play();
+        //Se pone el último marcador de golpes del color de los completados
         scoreText[scoreText.Count - 1].color = completedHoleColor;
+        //Se actualiza el récord si este ha sido superado
         int record = PlayerPrefs.GetInt("record");
         if (totalHits < record || record == 0)
         {
             PlayerPrefs.SetInt("record", totalHits);
             recordHitsText.text = "RECORD HITS: " + totalHits;
+            
         }
+        //Se activan los elementos de la UI del final del juego
         extraInfoStuff.gameObject.SetActive(true);
         GameMenuManager.sharedInstance.ActivateCanvas();
-        StartCoroutine(NewRecord());
+        //Y finalmente si, de nuevo, se ha superado el récord, se activa la celebración correspondiente (tomaaa)
+        if (totalHits < record || record == 0)
+        {
+            StartCoroutine(NewRecord());
+        }
     }
 
     public void ResetGame()
     {
+        //Se resetean las variables
         currentHole = 0;
         previousHitNumbers = new List<int>();
         currentHitNumber = 0;
         totalHits = 0;
+        //Se reinicia la puntuación
         for (int i = 0; i < scoreText.Count; i++)
         {
             scoreText[i].text = (i+1) + "\t\t\t -\t\t00";
         }
         totalHitsText.text = "TOTAL HITS: 000";
         ChangeScoreColor();
+        //Se oculta la UI de final de partida
         extraInfoStuff.gameObject.SetActive(false);
+        //Se resetea la bola
         ResetBall();
+        //Y se cambia la música
         SoundManager.sharedInstance.endGameMusic.Stop();
         SoundManager.sharedInstance.gameMusic.Play();
     }
-
+    
+    //Corutina que se activa al batir el récord
     private IEnumerator NewRecord()
     {
         newRecordText.gameObject.SetActive(true);
@@ -136,10 +154,13 @@ public class GameManager : MonoBehaviour
 
     public void UpdateCurrentHits()
     {
+        //Al actualizarse en tiempo real, se comprueba si en este hoyo hay golpes
+        //Si no es así se añade una nueva instancia de conteo
         if (currentHole >= previousHitNumbers.Count)
         {
             previousHitNumbers.Add(currentHitNumber);
         }
+        //Si los había se añade el nuevo golpe
         else
         {
             previousHitNumbers[currentHole] += currentHitNumber;
@@ -170,6 +191,8 @@ public class GameManager : MonoBehaviour
 
     private void ChangeScoreColor()
     {
+        //Este método cambia el color de la puntuación comprobando en cada línea si se corresponde al hoyo actual,
+        //si está por detrás o si está por delante
         for (int i = 0; i < scoreText.Count; i++)
         {
             if (i < currentHole)
@@ -201,6 +224,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeMovement()
     {
+        //Habilita los tipos de movimientos elegidos en el menú de inicio
         switch (movementDropdown.value)
         {
             case 0:
@@ -222,7 +246,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ChangeTrun()
-    {
+    {//Habilita el giro de cámara elegido en el menú de inicio
         switch (turnDropdown.value)
         {
             case 0:

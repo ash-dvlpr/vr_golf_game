@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Clase que anima las manos del jugador cuando pellizcan o cierran el puño
 public class AnimateHands : MonoBehaviour
 {
     [SerializeField] private InputActionProperty pinchAnimationAction;

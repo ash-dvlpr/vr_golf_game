@@ -1,9 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Clase que controla la orientación y posición del menú de puntuaciones,
+//haciendo que se ponga frente al jugador cada vez que se active
 public class GameMenuManager : MonoBehaviour
 {
     public static GameMenuManager sharedInstance;
@@ -25,7 +24,6 @@ public class GameMenuManager : MonoBehaviour
         else
         {
             sharedInstance = this;
-            //DontDestroyOnLoad(gameObject);
         }
     }
 

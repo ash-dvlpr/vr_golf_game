@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+//Clase que controla la activación de los rayos de agarre
 public class ToggleGrabRay : MonoBehaviour
 {
     [SerializeField] private XRDirectInteractor leftDirectGrab;

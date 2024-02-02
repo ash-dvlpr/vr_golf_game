@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//Clase para almacenar audios que serán accesibles desde cualquier clase
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager sharedInstance;
@@ -10,6 +8,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource gameMusic;
     public AudioSource endGameMusic;
     public AudioSource clappingSound;
+    public AudioSource trumpetsSound;
     
     private void Awake()
     {
@@ -20,7 +19,6 @@ public class SoundManager : MonoBehaviour
         else
         {
             sharedInstance = this;
-            //DontDestroyOnLoad(gameObject);
         }
     }
 }
